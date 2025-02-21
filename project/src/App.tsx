@@ -1,18 +1,41 @@
 import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 import { Code2, Smartphone, Palette, Layout, ChevronRight, Star, Users, MessageSquare, X, ArrowRight, Database, Cloud, Server, Cpu } from 'lucide-react';
+import khushiImage from './Images/khushi.png';
+import artusImage from './Images/artus.png';
+import e3lImage from './Images/e3l.png';
+import flexitImage from './Images/flexit.png';
+import landingPagesImage from './Images/landing .png';
+import litebiteImage from './Images/litebite.png';
+import swaamiyoImage from './Images/swaami.png';
+import vivahSahyogImage from './Images/vivah.png';
 
 function App() {
   const [showPopup, setShowPopup] = useState(true);
-  const [showInquiry, setShowInquiry] = useState(false);
+  const [showInquiry, setShowInquiry] = useState(true); // Set to true to show the form initially
   const [showProjects, setShowProjects] = useState(false);
 
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+
+    emailjs.sendForm('service_wetyq9s', 'template_l7raoze', form, 'gtzWyPteXQB4C3pwh')
+      .then((result) => {
+        console.log(result.text);
+        alert('Message sent successfully!');
+        form.reset();
+      }, (error) => {
+        console.log(error.text);
+        alert('Failed to send the message, please try again.');
+      });
+  };
   const services = [
     { icon: <Code2 className="w-8 h-8" />, title: 'Web Development', description: 'Custom websites built with modern technologies' },
     { icon: <Smartphone className="w-8 h-8" />, title: 'App Development', description: 'Native and cross-platform mobile applications' },
     { icon: <Palette className="w-8 h-8" />, title: 'UI/UX Design', description: 'User-centered design solutions' },
     { icon: <Layout className="w-8 h-8" />, title: 'WordPress Development', description: 'Custom WordPress themes and plugins' },
   ];
-
+  
   const techStack = {
     frontend: ['React', 'Vue.js', 'Next.js', 'Nuxt.js'],
     backend: ['Node.js', 'PHP', 'Nest.js'],
@@ -21,38 +44,28 @@ function App() {
 
   const teamMembers = [
     {
-      name: 'Alex Thompson',
-      role: 'Lead Frontend Developer',
+      name: 'Harshit Sharma',
+      role: 'Lead Developer',
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
       expertise: 'React, Vue.js, Next.js'
     },
+    
     {
-      name: 'Sarah Chen',
-      role: 'Senior Backend Developer',
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80',
-      expertise: 'Node.js, PHP, AWS'
-    },
-    {
-      name: 'Michael Rodriguez',
-      role: 'DevOps Engineer',
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80',
-      expertise: 'AWS, Kafka, Redis'
-    },
-    {
-      name: 'Emily Parker',
-      role: 'UI/UX Designer',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80',
-      expertise: 'Figma, Adobe XD'
+      name: 'Khushi Shroff',
+      role: 'UX/UI Designer',
+      image: khushiImage,
+      expertise: 'Figma, Adobe XD, Invision, Wix'
     }
   ];
 
   const projects = [
-    { image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80', title: 'E-Commerce Platform', category: 'Web Development' },
-    { image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80', title: 'Fitness App', category: 'App Development' },
-    { image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&q=80', title: 'Dashboard Design', category: 'UI/UX Design' },
-    { image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80', title: 'Social Media Platform', category: 'Web Development' },
-    { image: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=800&q=80', title: 'Restaurant App', category: 'App Development' },
-    { image: 'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=800&q=80', title: 'Travel Website', category: 'Web Development' },
+    { image: artusImage, link: 'https://artusai.co/', title: 'Artus Website', category: 'UX/UI Design' },
+    { image: e3lImage, link: 'https://e3l.co/', title: 'e3l Website', category: 'UX/UI Design' },
+    { image: flexitImage, link: 'https://www.figma.com/design/rtbJfbzFv5qg8D8HQqIrec/FlexIt?node-id=3-860&node-type=FRAME&t=2LkoYSa2tO3aLeLo-0', title: 'Flexit Clothing', category: 'UI/UX Design' },
+    { image: landingPagesImage, link: 'https://www.figma.com/design/CSkyIRBsnjdRybHH6ZqVyb/Landing-Pages?node-id=0-1&node-type=&t=bssYrUhacljCbQRB-0', title: 'Landing Pages', category: 'UX/UI Design' },
+    { image: litebiteImage, link: 'https://www.figma.com/design/nsxk9fvP8lzIu72Wf4TaL1/Litebite?node-id=0-1&p=f&t=6uCIGcH89KBFAu5U-0', title: 'Litebite App', category: 'UX/UI Design' },
+    { image: swaamiyoImage, link: 'https://www.swamiyouphaar.com/', title: 'Swaamiyo', category: 'UX/UI Design' },
+    { image: vivahSahyogImage, link: 'https://www.vivahsahyog.com/', title: 'VivahSahyog App', category: 'UX/UI Design' },
   ];
 
   return (
@@ -125,26 +138,34 @@ function App() {
             <h3 className="text-3xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-purple-100">
               Let's Discuss Your Project
             </h3>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-sm font-medium mb-2 text-purple-200">Name</label>
                 <input 
                   type="text" 
+                  name="name"
                   className="w-full px-4 py-3 rounded-lg bg-purple-800/30 border border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-purple-300/50 text-purple-100"
                   placeholder="Your name"
+                  required
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2 text-purple-200">Email</label>
                 <input 
                   type="email" 
+                  name="email"
                   className="w-full px-4 py-3 rounded-lg bg-purple-800/30 border border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-purple-300/50 text-purple-100"
                   placeholder="your@email.com"
+                  required
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2 text-purple-200">Project Type</label>
-                <select className="w-full px-4 py-3 rounded-lg bg-purple-800/30 border border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-purple-100">
+                <select 
+                  name="projectType"
+                  className="w-full px-4 py-3 rounded-lg bg-purple-800/30 border border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-purple-100"
+                  required
+                >
                   <option className="bg-purple-900">Web Development</option>
                   <option className="bg-purple-900">App Development</option>
                   <option className="bg-purple-900">UI/UX Design</option>
@@ -154,8 +175,10 @@ function App() {
               <div>
                 <label className="block text-sm font-medium mb-2 text-purple-200">Message</label>
                 <textarea 
+                  name="message"
                   className="w-full px-4 py-3 rounded-lg bg-purple-800/30 border border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder-purple-300/50 text-purple-100 h-32"
                   placeholder="Tell us about your project"
+                  required
                 ></textarea>
               </div>
               <button 
@@ -168,6 +191,7 @@ function App() {
           </div>
         </div>
       )}
+
 
       {/* Services Section */}
       <section className="py-32 px-4 relative overflow-hidden">
@@ -281,14 +305,14 @@ function App() {
         </div>
       </section>
 
-      {/* Team Section */}
+            {/* Team Section */}
       <section className="py-32 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent"></div>
         <div className="max-w-6xl mx-auto relative z-10">
           <h2 className="text-5xl font-bold text-center mb-20 bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-purple-100">
-            Meet Our Team
+            Our Founders
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {teamMembers.map((member, index) => (
               <div key={index} className="group bg-purple-900/20 backdrop-blur-sm rounded-2xl hover:bg-purple-900/30 transition-all transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(147,51,234,0.2)] border border-purple-500/10 overflow-hidden">
                 <div className="relative h-64 overflow-hidden">
@@ -310,7 +334,7 @@ function App() {
         </div>
       </section>
 
-      {/* Recent Projects */}
+            {/* Recent Projects */}
       <section className="py-32 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent"></div>
         <div className="max-w-6xl mx-auto relative z-10">
@@ -319,7 +343,7 @@ function App() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {projects.slice(0, 3).map((project, index) => (
-              <div key={index} className="group relative overflow-hidden rounded-2xl">
+              <a key={index} href={project.link} target="_blank" rel="noopener noreferrer" className="group relative overflow-hidden rounded-2xl">
                 <div className="absolute inset-0 bg-purple-500/20 group-hover:bg-purple-500/0 transition-colors z-10"></div>
                 <img 
                   src={project.image} 
@@ -334,7 +358,7 @@ function App() {
                     <p className="text-purple-400">{project.category}</p>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
           <div className="text-center mt-16">
@@ -410,8 +434,8 @@ function App() {
                     <Users className="w-6 h-6 text-purple-100" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-purple-100">John Smith</h4>
-                    <p className="text-purple-400 text-sm">CEO, Tech Solutions</p>
+                    <h4 className="font-semibold text-purple-100">Akshit Goel</h4>
+                    <p className="text-purple-400 text-sm">CEO, VivahSahyog</p>
                   </div>
                 </div>
               </div>
